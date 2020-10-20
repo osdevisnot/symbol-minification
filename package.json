@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "yarn build:esbuild && yarn build:terser",
+    "postbuild": "node sizeme.js && prettier --write dist/*.js",
+    "build:esbuild": "esbuild --bundle src/index.js --outfile=dist/esbuild.js --format=esm --minify",
+    "build:terser": "terser --compress --mangle --mangle-props regex=/^_/ --output dist/terser.js --ecma 2016 --toplevel -- src/index.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.7.17",
+    "gzip-size": "^5.1.1",
+    "prettier": "^2.1.2",
+    "terser": "^5.3.7"
+  }
+}
